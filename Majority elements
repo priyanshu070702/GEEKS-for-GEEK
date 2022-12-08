@@ -1,0 +1,44 @@
+class Solution{
+  public:
+     // Function to find majority element in the array
+    // a: input array
+    // size: size of input array
+    int majorityElement(int a[], int size)
+    {
+        
+       long long count=1;
+        
+        long long index=0;
+        
+        for(long long i=1;i<size;i++){
+            if(a[i]==a[index]){
+                count++;
+            }
+            else{
+                count--;
+            }
+            if(count==0){
+                index=i;
+                count=1;
+                
+            }
+        }
+        count=0;
+        for(long long i=0;i<size;i++){
+            if(a[i]==a[index]){
+                count++;
+            }
+        }
+        if(count>(size/2)){
+            return a[index];
+        }
+        else{
+            return -1;
+        }
+       
+        
+        
+    
+    
+    }
+};
