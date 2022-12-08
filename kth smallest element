@@ -1,0 +1,47 @@
+class Solution{
+    public:
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        int max=INT_MIN;
+        for(int i=0;i<=r;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+        }
+        int *c;
+        c=new int(max+1);
+        
+        for(int i=0;i<max+1;i++){
+            c[i]=-1;
+        }
+        
+        for(int i=0;i<=r;i++){
+            c[arr[i]]++;
+        }
+        int i=0,j=0;
+        while(i>max+1){
+            if(c[i]>-1){
+                arr[j++]=i;
+                c[i]--;
+            }
+            else{
+                i++;
+            }
+        }
+        
+        return arr[0];
+        
+        
+        
+        
+        
+        
+        // sort(arr,arr+(r+1));int t;
+        // t= arr[k-1];
+        // return t;
+    }
+};
