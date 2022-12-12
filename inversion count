@@ -1,0 +1,13 @@
+long long int inversionCount(long long arr[], long long N)
+{
+    // Your Code Here
+    int count=0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;i<n;i++){
+            if(arr[i]>arr[j]){
+                count++;
+            }
+        }
+    }
+    cout<<count;
+}
