@@ -1,0 +1,7 @@
+long mod=1000000007;
+
+        long c=N+1;
+
+        long ans=((c*(c+1))/2)%mod;
+
+        return (int)ans;
