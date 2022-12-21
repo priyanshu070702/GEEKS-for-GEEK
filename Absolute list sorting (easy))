@@ -1,0 +1,23 @@
+class Solution{
+    
+public:
+    Node* sortList(Node* head)
+    {
+        // Your Code Here
+        Node *p=head;
+        Node *q=NULL;
+        Node *r=NULL;
+       while(p->next!=NULL){
+           if(p->next->data<0){
+               r=q;
+               q=p;
+               p=p->next;
+               q->next=r;
+       }
+    //   head=q;
+    //   return head;
+    }
+    head=q;
+       return head;
+    }
+};
