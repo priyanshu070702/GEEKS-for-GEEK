@@ -1,0 +1,25 @@
+public:
+    //Function to find the days of buying and selling stock for max profit.
+    vector<vector<int> > stockBuySell(vector<int> A, int n){
+        // code here
+        vector<vector<int>>ans;
+        int buy=0,sell=0;
+        int i=0;
+        while(i<n-1){
+            if(A[i]<A[i+1]){
+                buy=i;
+                while(A[i]<A[i+1] && i<n-1){
+                    i++;
+                }
+                sell=i;
+                ans.push_back({buy,sell});
+            }
+            i++;
+            
+        }
+        return ans;
+    }
+};
+
+
+link-https://practice.geeksforgeeks.org/problems/stock-buy-and-sell-1587115621/1?page=2&company[]=Amazon&sortBy=submissions
