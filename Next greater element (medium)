@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    vector<long long> nextLargerElement(vector<long long> &arr, int n){
+        // Your code here
+        vector<long long> ans;
+        reverse(arr.begin() , arr.end());
+
+        stack<long long> st;
+        ans.push_back(-1);
+
+        st.push(arr[0]);
+
+        for(int i=1; i<n; i++){
+             while(!st.empty() && arr[i]>st.top())  st.pop();
+
+                if(!st.empty())
+                    ans.push_back(st.top());
+                else
+                    ans.push_back(-1);
+
+                st.push(arr[i]);
+
+        }
+        reverse(ans.begin() , ans.end()); 
+        return ans;
+    }
+};
