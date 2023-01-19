@@ -1,0 +1,18 @@
+class Solution{
+public:	
+	// Function to check if array has 2 elements
+	// whose sum is equal to the given value
+	bool hasArrayTwoCandidates(int arr[], int n, int x) {
+	    // code here
+	    sort(arr,arr+n);
+	    int low=0;
+	    int high=n-1;
+	    int mid;
+	    while(low<high){  //through binary search
+	        if(arr[low]+arr[high]==x)return true;
+	        else if(arr[low]+arr[high]<x)low++;
+	        else high--;
+	    }
+	    return false;
+	}
+};
