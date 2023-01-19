@@ -1,0 +1,18 @@
+class Solution{
+    public:
+    int carpetBox(int a, int b, int c, int d){
+        //code here
+        int ans=0;
+        while(max(c,d)<max(a,b)){
+            if(a>=b)a/=2;
+            else b/=2;
+            ans++;
+        }
+        while(min(c,d)<min(a,b)){
+            if(a<=b)a/=2;
+            else b/=2;
+            ans++;
+        }
+        return ans;
+    }
+};
