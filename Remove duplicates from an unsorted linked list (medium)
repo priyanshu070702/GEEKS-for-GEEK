@@ -1,0 +1,55 @@
+class Solution
+{
+    public:
+    //Function to remove duplicates from unsorted linked list.
+    Node * removeDuplicates( Node *head) 
+    {
+     
+        unordered_set<int>s;
+        Node *p=head;
+        if(head==NULL)return head;
+        s.insert(p->data);
+        
+        while(p && p->next){
+            if(s.find(p->next->data)!=s.end()){
+                p->next=p->next->next;
+            }
+            else{
+                s.insert(p->next->data);
+                p=p->next;
+            }
+        }
+        return head;
+        
+        
+    //  vector<int>v;        //This cannot be run in GFG due to different defition of function
+    //  Node *a=head;
+    //  while(head!=NULL){
+    //      v.push_back(head->data);
+    //      head=head->next;
+    //  }
+    //  sort(v.begin(),v.end());
+     
+    //  Node *t = new Node;
+    //  head=t;
+    //  for(int i=0;i<v.size();i++){
+    //      t->data=v[i];
+    //      t=t->next;
+    //  }
+    //  Node *p=head;
+    //  Node *q=head->next;
+    //  while(q!=NULL){
+    //      if(p->data!=q->data){
+    //         p=p->next;
+    //         q=q->next;
+    //      }
+    //      else{
+    //          Node *temp=q;
+    //          q=q->next;
+    //          p->next=temp->next;
+    //          delete(temp);
+    //      }
+    //  }
+    //  return head;
+    }
+};
