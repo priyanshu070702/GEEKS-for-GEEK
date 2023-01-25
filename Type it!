@@ -1,0 +1,36 @@
+class Solution {
+  public:
+    int minOperation(string s) {
+        string ans="";
+
+      int res=0;
+
+      int n=s.length();
+
+      ans.push_back(s[0]);
+
+      for(int i=1;i<n;i++){
+
+          if(s.substr(i,ans.length())==ans){
+
+              int k=ans.length();
+
+              res=max(res,k);
+
+          }
+
+          ans.push_back(s[i]);
+
+      }
+
+      if(res>0)
+
+      return n-res+1;
+
+      else
+
+ 
+
+      return n-res;
+    }
+};
