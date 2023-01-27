@@ -1,0 +1,24 @@
+class Solution{
+  public:
+    // arr[] : the input array
+    // N : size of the array arr[]
+    
+    //Function to return length of longest subsequence of consecutive integers.
+    int findLongestConseqSubseq(int arr[], int N)
+    {
+      int count=1;
+      int maxcount=1;
+      sort(arr,arr+N);
+      for(int i=0;i<N;i++){
+          if(arr[i+1]-arr[i]==1){
+              count++;
+              maxcount=max(count,maxcount);
+          }
+          else if(arr[i+1]-arr[i]==0){
+              continue;
+          }
+          else count=1;
+      }
+      return maxcount;
+    }
+};
