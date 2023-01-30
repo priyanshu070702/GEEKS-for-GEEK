@@ -1,0 +1,29 @@
+class Solution{
+  public:
+    vector<vector<int>> adj,dp;
+    
+    void dfs(int n,int p){
+        
+        dp[n][0]=0;dp[n][1]=1;
+        for(auto it : adj[n]){
+            if(it==p)continue;
+            
+            dfs(it,n);
+            dp[n][0]+=dp[it][1];
+            dp[n][1]+=min(dp[it][0],dp[it][1]);
+        }
+      
+    }
+    int countVertex(int n, vector<vector<int>>edg){
+        int i,j,m;
+        m=edg.size();
+        adj.resize(n+1);
+        dp.resize(n+1,vector<int>(2));
+        for(i=0;i<m;i++){
+            adj[edg[i][0]].push_back(edg[i][1]);
+            adj[edg[i][1]].push_back(edg[i][0]);
+        }
+        dfs(1,-1);
+        return min(dp[1][0],dp[1][1]);
+    }
+};
