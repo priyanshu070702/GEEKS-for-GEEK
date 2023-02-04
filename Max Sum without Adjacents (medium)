@@ -1,0 +1,21 @@
+class Solution{
+public:	
+	// calculate the maximum sum with out adjacent
+	int adj(int *arr,int n,int i,int *dp){
+	  
+	    if(i>=n)return 0;  //base condition
+	    if(dp[i]!=-1)return dp[i];  //if previous call already made
+	    
+	    int x=adj(arr,n,i+1,dp);  //no element taken
+	    int y=arr[i] + adj(arr,n,i+2,dp);   //if element taken
+	    
+	    int m = max(x,y);
+	    dp[i]=m;
+	    return m;
+	}
+	int findMaxSum(int *arr, int n) {
+	    int dp[n+1];
+	    memset(dp,-1,sizeof(dp));
+	    return adj(arr,n,0,dp);
+	}
+};
