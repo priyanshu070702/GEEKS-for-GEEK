@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    int getMinimumDays(int N,string S, vector<int> &P) {
+        // code here
+        int ans=0, i=0,j=0;
+        while(i<N-1){
+            if(S[i]!='?' && S[i]!=S[i+1])i++;
+            else if(S[i]=='?')i++;
+            else{
+                S[P[j]]='?';
+                j++;
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
