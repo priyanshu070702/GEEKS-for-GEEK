@@ -1,0 +1,17 @@
+class Solution{
+  public:		
+	int lps(string s) {
+	    int cnt=0,i=1;
+	    while(i<s.length()){
+	        if(s[cnt]==s[i]){
+	            cnt++;
+	            i++;
+	        }
+	        else{
+	            i=i-cnt+1;
+	            cnt=0;
+	        }
+	   }
+	    return cnt;
+	}
+};
