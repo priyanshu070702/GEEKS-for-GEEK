@@ -1,0 +1,42 @@
+class Solution
+{
+public:
+   
+    Node *reverse(Node *head, int k)
+{
+    Node* secHead = head;
+    Node* tail = nullptr;
+    while(k--) {
+        tail = secHead;
+        secHead = secHead->next;
+    }
+    
+    // break the list
+    tail->next = NULL;
+    
+    Node *p1=head; Node *q1=NULL; Node *r1=NULL;
+    while(p1!=NULL){
+        r1=q1;
+        q1=p1;
+        p1=p1->next;
+        q1->next=r1;
+    }
+    
+    // reverse sec part
+    Node *p2=secHead; Node *q2=NULL; Node *r2=NULL;
+    while(p2!=NULL){
+        r2=q2;
+        q2=p2;
+        p2=p2->next;
+        q2->next=r2;
+    }
+    
+    // join
+    head->next = q2;
+    return tail;
+        
+        
+        
+        
+    }
+};
