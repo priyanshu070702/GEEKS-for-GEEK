@@ -1,0 +1,39 @@
+#define ll long long
+class Solution {
+  public:
+    long long maxTripletProduct(long long A[], int n)
+    {
+    	// Complete the function
+    	ll mx1,mx2,mx3,mn1,mn2;
+    	mx1=mx2=mx3=INT_MIN;
+    	mn1=mn2=INT_MAX;
+    	
+    	for(int i=0;i<n;i++){
+    	    
+    	    if(A[i]<mn1){
+    	        mn2=mn1;
+    	        mn1=A[i];
+    	    }
+    	    else if(A[i]<mn2){
+    	        mn2=A[i];
+    	    }
+    	    
+    	    if(A[i]>mx1){
+    	        mx3=mx2;
+    	        mx2=mx1;
+    	        mx1=A[i];
+    	    }
+    	    else if(A[i]>mx2){
+    	        mx3=mx2;
+    	        mx2=A[i];
+    	    }
+    	    else if(A[i]>mx3){
+    	        mx3=A[i];
+    	    }
+    	}
+    	ll p1=mx1*mx2*mx3;
+    	ll p2=mn1*mn2*(max(mx1,max(mx2,mx3)));
+    	
+    	return max(p1,p2);
+    }
+};
