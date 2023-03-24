@@ -1,0 +1,39 @@
+class Solution {
+  public:
+    string removeReverse(string s) {
+        int n=s.length();
+        vector<int>v(26,0);
+        for(int i=0;i<n;i++){
+            v[s[i]-'a']++;
+        }
+        vector<int>pos(26,-1);
+        bool f=true;
+        int i=0,j=n-1;
+        
+        while(i<=j){
+            if(f==true){
+                int ele=s[i]-'a';
+                if(v[ele]>1)f=false;
+                if(v[ele]==1)pos[ele]=i;
+                v[ele]--;
+                i++;
+            }
+            else{
+                int ele=s[j]-'a';
+                if(v[ele]>1)f=true;
+                if(v[ele]==1)pos[ele]=j;
+                v[ele]--;
+                j--;
+            }
+        }
+        string str="";
+        for(int i=0;i<n;i++){
+            int ele=s[i]-'a';
+            if(pos[ele]==i)str.push_back(s[i]);
+        }
+        if(f==false){
+            reverse(str.begin(),str.end());
+        }
+        return str;
+    }
+};
