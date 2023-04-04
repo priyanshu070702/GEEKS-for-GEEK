@@ -1,0 +1,19 @@
+int minSteps(string str) {
+    int cnta=0;
+    int cntb=0;
+    int j=0;
+    int i=1;
+    while(j<str.length()){
+        if(str[i]==str[j]){
+            i++;
+        }
+        else{
+            if(str[j]=='a')cnta++;
+            else if(str[j]=='b')cntb++;
+            j=i;
+            i++;
+        }
+    }
+    if(cnta<=cntb)return cnta+1;
+    return cntb+1;
+}
