@@ -3,6 +3,7 @@
 using namespace std;
 
 // } Driver Code Ends
+
 class Solution
 {
   public:
@@ -11,25 +12,49 @@ class Solution
         return 0;
     }
     string reverseEqn (string s){
-        string rev="";
+        stack<string>st;
         string temp="";
-        int i =  s.length()-1;
-        while(i>=0){
+        int i=0;
+        while(i<s.length()){
             if(exp(s[i])==1){
-                rev+=s[i];
-                i--;
+                string str="";
+                str+=s[i];
+                st.push(str);
+                i++;
             }
             else{
-                while(exp(s[i])==0 && i>=0){
+                while(exp(s[i])==0 && i<s.length()){
                     temp+=s[i];
-                    i--;
+                    i++;
                 }
-                reverse(temp.begin(),temp.end());
-                rev+=temp;
+                st.push(temp);
                 temp="";
             }
+        }temp="";
+        while(!st.empty()){
+            temp+=st.top();
+            st.pop();
         }
-        return rev;
+        return temp;
+        // string rev="";
+        // string temp="";
+        // int i =  s.length()-1;
+        // while(i>=0){
+        //     if(exp(s[i])==1){
+        //         rev+=s[i];
+        //         i--;
+        //     }
+        //     else{
+        //         while(exp(s[i])==0 && i>=0){
+        //             temp+=s[i];
+        //             i--;
+        //         }
+        //         reverse(temp.begin(),temp.end());
+        //         rev+=temp;
+        //         temp="";
+        //     }
+        // }
+        // return rev;
     }
 };
 
