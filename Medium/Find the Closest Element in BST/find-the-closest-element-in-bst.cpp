@@ -32,22 +32,42 @@ struct Node {
 };
 */
 
+/*
+Tree Node
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
 class Solution
 {
     public:
     //Function to find the least absolute difference between any node
 	//value of the BST and the given integer.
-	
-    int minDiff(Node *root, int k)
-    {
-        if(root==NULL)return k;
+	int func(Node *root,int k){
+	    if(root==NULL)return k;
         if(root->data==k)return 0;
-        if(k>=root->data){
-            return min((k-root->data),minDiff(root->right,k));
+	    int mn=k;
+	    if(k>=root->data){
+            mn=func(root->right,k);
         }
         else if(k<root->data){
-            return min((root->data-k),minDiff(root->left,k));
+            mn=func(root->left,k);
         }
+        mn=min(abs(root->data-k),mn);
+        return mn;
+	}
+    int minDiff(Node *root, int k)
+    {
+       
+        return func(root,k);
     }
 };
 
