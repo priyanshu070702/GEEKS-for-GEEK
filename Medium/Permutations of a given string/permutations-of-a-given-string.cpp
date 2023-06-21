@@ -6,24 +6,23 @@ using namespace std;
 class Solution
 {
 	public:
-	    void func(string s, set<string>&st, int i){
-	        if(i>=s.length()){
-	            st.insert(s);
+	    void solve_permu(string S,int i,vector<string>&res){
+	        if(i>=S.length()){
+	            res.push_back(S);
 	            return;
 	        }
-	        for(int j=i;j<s.length();j++){
-	            
-	                swap(s[j],s[i]);
-	                func(s,st,i+1);
-	                swap(s[i],s[j]);
-	            
-	    }}
+	        for(int idx=i;idx<S.length();idx++){
+	            swap(S[i],S[idx]);
+	            solve_permu(S,i+1,res);
+	            swap(S[i],S[idx]);
+	        }
+	    }
 		vector<string>find_permutation(string S)
 		{
-		    set<string>st;
-		    int i=0;
-		    func(S,st,i);
-		    vector<string>res(st.begin(),st.end());
+		    vector<string>res;
+		    solve_permu(S, 0, res);
+		    sort(res.begin(),res.end());
+		    res.erase(unique(res.begin(), res.end()), res.end());
 		    return res;
 		}
 };
@@ -40,6 +39,7 @@ int main(){
 	    cin >> S;
 	    Solution ob;
 	    vector<string> ans = ob.find_permutation(S);
+	    sort(ans.begin(),ans.end());
 	    for(auto i: ans)
 	    {
 	    	cout<<i<<" ";
