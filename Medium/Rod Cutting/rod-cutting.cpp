@@ -10,14 +10,24 @@ using namespace std;
 
 class Solution{
   public:
-    int cutRod(int price[], int n) {
-        vector<int>dp(n+1);
-        for(int i=1;i<=n;i++){
-            for(int j=0;j<i;j++){
-                dp[i]=max(dp[i],dp[i-j-1]+price[j]);
-            }
+    int solveMemo(int price[], int n, int idx, int sz, vector<vector<int>>&dp){
+        if(idx==sz)return 0;
+        if(n==0)return 0;
+        
+        if(dp[n][idx]!=-1)return dp[n][idx];
+        //take
+        int take=INT_MIN;
+        if(idx+1<=n){
+            take=price[idx]+solveMemo(price,n-(idx+1),idx,sz,dp);
         }
-        return dp[n];
+        //not take
+        int not_take=solveMemo(price,n,idx+1,sz,dp);
+        
+        return dp[n][idx] = max(take,not_take);
+    }
+    int cutRod(int price[], int n) {
+        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+        return solveMemo(price,n,0,n,dp);
     }
 };
 
