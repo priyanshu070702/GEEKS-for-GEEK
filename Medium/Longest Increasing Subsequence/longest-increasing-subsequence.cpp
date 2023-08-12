@@ -8,37 +8,20 @@ using namespace std;
 class Solution
 {
     public:
-    // //Function to find length of longest increasing subsequence.
-    // int solveMemo(int nums[], int n, int curr, int prev){
-    //     if(curr==n)return 0;
-    //     if(dp[curr][prev+1]!=-1)return dp[curr][prev+1];
-    //     //include
-    //     int include=0;
-    //     if(prev==-1 || nums[curr]>nums[prev]){
-    //         include=1+solveMemo(nums,n,curr+1,curr);
-    //     }
-    //     //exclude
-    //     int exclude=solveMemo(nums,n,curr+1,prev);
-    //     return dp[curr][prev+1]=max(include,exclude);
-    // }
-    int solveTab(int n, int nums[]){
-        vector<int>cu(n+1,0);
-        vector<int>nxt(n+1,0);
-        for(int curr=n-1;curr>=0;curr--){
-            for(int prev=curr-1;prev>=-1;prev--){
-                //include
-                int include=0;
-                if(prev==-1 || nums[curr]>nums[prev]){
-                   include=1+nxt[curr+1];
-                }
-                //exclude
-                int exclude=nxt[prev+1];
-                
-                cu[prev+1]=max(include,exclude);
-            }
-            nxt=cu;
+    //Function to find length of longest increasing subsequence.
+    int solveRec(int n, int a[], int prev, int curr, vector<vector<int>>&dp){
+        if(curr==n)return 0;
+        
+        if(dp[prev+1][curr]!=-1)return dp[prev+1][curr];
+        //include condition
+        int include=0;
+        if(prev==-1 || a[curr]>a[prev]){
+            include=1+solveRec(n,a,curr,curr+1,dp);
         }
-        return nxt[0];
+        //exclude condition
+        int exclude=solveRec(n,a,prev,curr+1,dp);
+        
+        return dp[prev+1][curr]=max(include, exclude);
     }
     int spaceOptimal(int n, int nums[]){
         if(n==0)return 0;
@@ -57,7 +40,9 @@ class Solution
     }
     int longestSubsequence(int n, int a[])
     {
-       return spaceOptimal(n,a);
+    //   vector<vector<int>>dp(n+2,vector<int>(n+1,-1));
+    //   return solveRec(n,a,-1,0,dp);
+    return spaceOptimal(n,a);
     }
 };
 
