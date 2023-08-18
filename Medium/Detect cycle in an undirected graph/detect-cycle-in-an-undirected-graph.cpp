@@ -6,39 +6,37 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in an undirected graph.
-    bool BFS(vector<int>adj[], vector<bool>&vis, int i){
-        unordered_map<int,int>parent;
-        vis[i]=true;
-        parent[i]=-1;
-        
+    bool isCyclic(int node, vector<bool>&vis, vector<int> adj[]){
+        unordered_map<int,int>mp;
         queue<int>q;
-        q.push(i);
-        
+        vis[node]=1;
+        mp[node]=-1;
+        q.push(node);
         while(!q.empty()){
-            auto frontNode=q.front();
+            int front=q.front();
             q.pop();
-        
-        for(auto it:adj[frontNode]){
-            if(vis[it]==false){
-                q.push(it);
-                vis[it]=true;
-                parent[it]=frontNode;
-            }
-            else if(vis[it]==true && it!=parent[frontNode]){
-                return true;
+            for(auto it:adj[front]){
+                if(vis[it]==0){
+                    mp[it]=front;
+                    vis[it]=1;
+                    q.push(it);
+                }
+                else if(vis[it]==1 && it!=mp[front]){
+                    return 1;
+                } 
             }
         }
-        }
-        
-        return false;
+        return 0;
     }
     bool isCycle(int V, vector<int> adj[]) {
-        vector<bool>vis(V,false);
+        vector<bool>vis(V,0);
         for(int i=0;i<V;i++){
-            if(vis[i]==false)
-                if(BFS(adj,vis,i)==1)return true;
+            if(!vis[i]){
+                bool ans=isCyclic(i,vis,adj);
+                if(ans==1)return 1;
+            }
         }
-        return false;
+        return 0;
     }
 };
 
