@@ -7,53 +7,21 @@ typedef long long int ll;
 class Solution
 {
     public:
-    //recursion
-    int maxRec(int arr[],int n,int i){
-        if(i>=n)return 0;
-        //exclude
-        int exclude=maxRec(arr,n,i+1);
-        //include
-        int include=arr[i]+maxRec(arr,n,i+2);
-         
-        return max(exclude,include);
-    }
-    
-    int maxMemo(int arr[], int n ,int i, vector<int>&dp){
-        if(i>=n)return 0;
-        //exclude
-        if(dp[i]!=-1)return dp[i];
-        int exclude=maxMemo(arr,n,i+1,dp);
-        //include
-        int include=arr[i]+maxMemo(arr,n,i+2,dp);
-         
-        dp[i] = max(exclude,include);
-        return dp[i];
+    //Function to find the maximum money the thief can get.
+    int solveRec(int arr[], int n, int idx, vector<int>&dp){
+        if(idx>=n)return 0;
+        if(dp[idx]!=-1)return dp[idx];
+        
+        int take=arr[idx]+solveRec(arr,n,idx+2,dp);
+        int notTake=solveRec(arr,n,idx+1,dp);
+        
+        return dp[idx]=max(take,notTake);
     }
     int FindMaxSum(int arr[], int n)
     {
-        //recursion
-        // int ans=maxRec(arr,n,0);
-        // return ans;
-        
-        //memoization
         vector<int>dp(n+1,-1);
-        int ans=maxMemo(arr,n,0,dp);
-        return ans;
-        
-        // vector<int> dp(n);
-        // for(int i=0;i<n;i++){
-        //     if(i==0){
-        //         dp[i]=arr[i];
-        //     }else if(i==1){
-        //         dp[i]=max(arr[i],arr[i-1]);
-        //     }else{
-        //         dp[i]=max(dp[i-2]+arr[i],dp[i-1]);
-        //     }
-        // }
-        // return dp[n-1];
-        
+        return solveRec(arr,n,0,dp);
     }
-    
 };
 
 //{ Driver Code Starts.
