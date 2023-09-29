@@ -6,24 +6,24 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool cycle(int node,vector<bool>&vis,vector<bool>&dfsVis,vector<int>adj[]){
-        vis[node]=true;
-        dfsVis[node]=true;
-        for(auto it:adj[node]){
-            if(vis[it]==false){
-                cycle(it,vis,dfsVis,adj);
-                if(cycle(it,vis,dfsVis,adj)==true)return true;
+    bool isCycle(int idx, vector<bool>&vis, vector<bool>&dfsvis,vector<int> adj[]){
+        vis[idx]=1;
+        dfsvis[idx]=1;
+        for(auto it:adj[idx]){
+            if(vis[it]==1 && dfsvis[it]==1)return true;
+            else if(vis[it]==0){
+                bool val=isCycle(it,vis,dfsvis,adj);
+                if(val==1)return true;
             }
-            else if(vis[it]==true && dfsVis[it]==true)return true;
         }
-        dfsVis[node]=false;
+        dfsvis[idx]=0;
         return false;
     }
     bool isCyclic(int V, vector<int> adj[]) {
-        vector<bool>vis(V,false);
-        vector<bool>dfsVis(V,false);
+        vector<bool>vis(V,0);
+        vector<bool>dfsvis(V,0);
         for(int i=0;i<V;i++){
-            if(cycle(i,vis,dfsVis,adj)==true){
+            if(isCycle(i,vis,dfsvis,adj)==true){
                 return true;
             }
         }
