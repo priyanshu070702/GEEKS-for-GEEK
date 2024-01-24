@@ -5,13 +5,11 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    // Function to return a list containing the DFS traversal of the graph.
     void dfs(vector<int>adj[], vector<int>&ans, vector<bool>&vis, int idx){
         vis[idx]=true;
         ans.push_back(idx);
         for(auto it:adj[idx]){
             if(vis[it]==false){
-                vis[it]=true;
                 dfs(adj,ans,vis,it);
             }
         }
